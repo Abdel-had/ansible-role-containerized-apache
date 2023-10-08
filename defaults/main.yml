@@ -1,5 +1,5 @@
 ---
-
+home_page_message: Bienvenue sur {{ ansible_hostname }}
 system_user: vagrant
 docker_container_name: webapp
 external_port: 80
