@@ -1,0 +1,28 @@
+---
+
+- name: Install some packages
+  when: ansible_distribution == "CentOS"
+  package:
+    name: '{{ item }}'
+    state: present
+  loop:
+    - epel-release
+    - wget
+
+# Téléchargement du script d'installation de pip pour Python {{ python_version }}
+- name: download pip script
+  get_url:
+    url: https://bootstrap.pypa.io/pip/{{ python_version }}/get-pip.py
+    dest: /tmp/get-pip.py
+
+# Installation de pip pour Python {{ python_version }}
+- name: install python-pip
+  command: python{{ python_version }} /tmp/get-pip.py
+
+# Création d'un lien symbolique pour pip
+- name: Create a symbolic link for pip
+  file:
+    force: yes
+    src: /usr/local/bin/pip
+    dest: /usr/bin/pip
+    state: link

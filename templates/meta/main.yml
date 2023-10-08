@@ -1,0 +1,28 @@
+galaxy_info:
+  author: Abdel-had HANAMI
+  description: Deploy & run Docker project for Apache instance
+
+  license: ''
+
+  min_ansible_version: core 2.11.12
+
+  platforms:
+  - name: CentOS
+    versions:
+    - 7+
+  
+  galaxy_tags:
+    - system
+    - docker
+    - centos
+    - redhat
+    - apache
+    - container
+    - dockerized
+    - containzerized
+    - project
+    - automation
+    - eazytraing
+    - devops
+    - bootcamp
+    - mini-projet

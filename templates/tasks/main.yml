@@ -1,0 +1,41 @@
+---
+# pre-tasks
+
+- name: Import tasks from install-python.yml
+  import_tasks: install-python.yml
+
+- name: Import tasks from install-docker.yml
+  import_tasks: install-docker.yml
+
+
+# main tasks
+
+- name: Copy website template file
+  template:
+    src: '{{ home_page_file_name }}.j2'
+    dest: '/home/{{ system_user }}/{{ home_page_file_name }}'
+
+- name: Create Apache container
+  docker_container:
+    name: "{{ docker_container_name }}"
+    image: httpd
+    ports:
+      - "{{ external_port }}:{{ apache_port }}"
+    volumes:
+      - '/home/{{ system_user }}/{{ home_page_file_name }}:/usr/local/apache2/htdocs/{{ home_page_file_name }}'
+
+- name: Waiting for all containers to start up and website to be accessible
+  wait_for:
+    host: "{{ domain }}"
+    port: "{{ external_port }}"
+    timeout: 180
+  register: host_accessible
+  failed_when: False
+
+- debug:
+    msg: "Site is reachable"
+  when: host_accessible.state is defined and host_accessible.state == "started"
+
+- debug:
+    msg: "Site is NOT reachable"
+  when: host_accessible.state is defined and host_accessible.state == "stopped"

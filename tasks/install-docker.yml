@@ -1,0 +1,37 @@
+---
+
+# Installation du module Python Docker
+- name: Install docker python
+  pip:
+    name: docker-py
+
+# Installation des dépendances de Docker
+- name: Install Docker dependencies
+  ansible.builtin.yum:
+    name:
+      - yum-utils
+      - device-mapper-persistent-data
+      - lvm2
+    state: present
+
+# Ajout du dépôt Docker
+- name: Add Docker repo
+  ansible.builtin.yum_repository:
+    name: docker-ce-stable
+    description: Docker CE Stable - $basearch
+    baseurl: https://download.docker.com/linux/centos/7/$basearch/stable
+    gpgcheck: yes
+    gpgkey: https://download.docker.com/linux/centos/gpg
+
+# Installation de Docker
+- name: Install Docker
+  ansible.builtin.yum:
+    name: docker-ce
+    state: present
+
+# Démarrage et activation du service Docker
+- name: Start Docker service
+  ansible.builtin.systemd:
+    name: docker
+    state: started
+    enabled: yes
