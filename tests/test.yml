@@ -1,5 +1,5 @@
 ---
 - hosts: localhost
-  remote_user: root
+  system_user: root
   roles:
     - ansible-role-containerized-apache
