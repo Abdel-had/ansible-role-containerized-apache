@@ -52,7 +52,7 @@ Example Playbook
 
 ```
 - hosts: servers
-  remote_user: "{{ system_user }}"
+  system_user: root
   roles:
     - {{ role: ansible-role-containerized-apache }}  
 ```
