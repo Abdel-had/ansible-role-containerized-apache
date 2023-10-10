@@ -13,6 +13,9 @@ Here is my [training repo](https://github.com/Abdel-had/ansible-training)
 
 ------------
 
+<img width="960" alt="Mini-projet-ansible" src="https://github.com/Abdel-had/ansible-role-containerized-apache/assets/101605739/f5a62325-778f-46db-abd3-ee1ba8c4e1c3">
+
+
 Ansible Role: Containerized apache
 =========
 
